@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/picocss/1.5.7/pico.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.37/vue.global.prod.min.js"></script>
+</head>
+<body>
+<div id="app">
+</div>
+<script>
+  const Item = Vue.defineComponent({
+  props: ["id", "content"],
+  template: `
+    <article>
+    <input :id="id"  type="checkbox">
+    <label :for="id" v-html="content">  </label>
+    </article>`
+})
+
+const App = Vue.defineComponent({
+  components: {
+    Item,
+  },
+  data() {
+    return {
+      items: [
+        {
+          id: 1, 
+          content: `<b>Hardware 1</b><br/>Case has been opened and dust blwon out<br/>CD drive empty. No USB sticks in computer`
+        },
+        {
+          id: 2, 
+          content: `<b>BIOS</b><br/>
+          BIOS has been updated to latest version<br/>
+UEFI boot is enabled (legacy disabled)<br/>
+SMART monitoring is enabled (if available)<br>
+Change CMOS battery if time + date are incorrect
+`
+        },
+        {
+          id: 3, 
+          content: `<b>Wipe (WI)</b><br>Drive has been wiped. <ul><li>For SSDs, use hdparam or diskpart<li>for HDDs, use Darik's boot and nuke (3 passed)`
+        },
+        {
+          id: 4, 
+          content: `<b>OS</b><br/>Windows 10 or other OS installed<ul><li>Basic username and password<li>All tracking options are turned off`
+        },
+        {
+          id: 5, 
+          content: `<b>Bios 2 (B2)</b><br/>Fast boot and sucure boot are enabled (if available)<br>TPM is enabled (if available)<br>`
+        },
+        {
+          id: 6, 
+          content: `Updates (UP)<br>All OS updates are applied<brAll drivers are updated (open devmgmt.msc)<br>Knwon file extensions are NOT hidden`
+        },
+        {
+          id: 7, 
+          content: `Software (SO)<br>
+          Adobe Acrobat Reader is installed, and set to the default for PDFs<br>LibreOffice<br>Zoom (if webcam)`
+        },
+        {
+          id: 8, 
+          content: `Hardware 2 (H2)<br>
+          Test Hardware (USB, audio jack, CD drive, webcam/mic, laptops: (key, charger, speakers)`
+        },
+      ]
+    }
+  },
+  template: `<div class="container">
+    <Item v-for="item in items" :key="item.id" v-bind="item" />
+  </div>`
+})
+
+const app = Vue.createApp(App);
+app.mount("#app");
+</script>
+</body>
+</html>
