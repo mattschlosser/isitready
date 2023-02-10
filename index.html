@@ -14,9 +14,10 @@
 <script>
   const Item = Vue.defineComponent({
   props: ["id", "content", "checked"],
+  emits: ['update:checked'],
   template: `
     <article :class="{'bg-success': checked}">
-    <input :id="id"  type="checkbox" :value="checked" @input="$emit('update:checked', $event.target.value)">
+    <input :id="id"  type="checkbox" :checked="checked" @change="$emit('update:checked', $event.target.checked)">
     <label :for="id" v-html="content" >
       
         </label>
